@@ -6,4 +6,5 @@ package com.atguigu.mybatis.mapper;
  */
 public interface Test_Git {
     void findalal();
+    void hot_fix();
 }

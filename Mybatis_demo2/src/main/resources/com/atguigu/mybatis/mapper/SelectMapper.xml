@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.mapper.SelectMapper">
+    <select id="getUserById" resultType="com.atguigu.mybatis.pojo.User">
+        select *
+        from t_user
+        where id = #{id}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user
+        values (null, #{username}, #{password}, #{age}, #{sex}, null)
+    </insert>
+
+    <select id="getAllUser" resultType="user">
+        select *
+        from ${tableName}
+    </select>
+
+
+    <!--
+           resultMap：设置自定义映射
+           属性：
+           id：表示自定义映射的唯一标识
+           type：查询的数据要映射的实体类的类型
+           子标签：
+           id：设置主键的映射关系
+           result：设置普通字段的映射关系
+           association：设置多对一的映射关系
+           collection：设置一对多的映射关系
+           属性：
+           property：设置映射关系中实体类中的属性名
+           column：设置映射关系中表中的字段名
+          -->
+    <resultMap id="userMap" type="user">
+        <id property="id" column="id"></id>
+        <result property="id" column=""></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="age" column="age"></result>
+        <result property="sex" column="sex"></result>
+    </resultMap>
+    <select id="testModu" resultMap="userMap">
+        select * from t_user where username like concat("%",#{mohu},"%");
+    </select>
+</mapper>
